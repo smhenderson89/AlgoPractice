@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        img {
+            width: 150px;
+            height: auto;
+            margin-right: 25px;
+            margin-left: 25px;
+        }
+
+        #centerImage {
+            width: 350px;
+            height: auto;
+            margin-left: 75px;
+            margin-right: 75px;
+            align-items: center;
+        }
+
+    </style>
+    <title>Carousel Example</title>
+</head>
+<body>
+    <h3>Carousel of Cat Photos</h3>
+    <p>Here is an example</p>
+    <p id = "demo"></p>
+    <div class = "container" id = "images">
+        <button>Left</button>
+        <img src = "" id = "centerImage" alt = "centerImage">
+        <button>Right</button>
+        <br>
+        <br>
+        </div>
+    </div>
+    <button onclick="getCat()">Click Me</button>
+    <div id="gridDiv" class="data-grid">
+</body>
+<script>
+    async function getCat() {
+        let url = 'https://api.thecatapi.com/v1/images/search?breed_ids=beng&include_breeds=true&limit=10'
+        let data = await fetch(url);
+        fetch(url)
+            .then(response => {
+                return response.json();
+            })
+            .then((data => {
+                let catImages = []
+                for (let i = 0; i < data.length; i++ ) {
+                    catImages.push(data[i].url)
+                }
+                return catImages;                
+            })).then(catImages => {
+                dipslayImages(catImages);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        
+            document.getElementById("demo").innerHTML = "Load Images!"
+            function dipslayImages(catImages) {
+                let home = document.getElementById("images");
+                const imageL = catImages.length;
+                for (let i = 0; i < imageL; i++) {
+                    const imageDiv = document.createElement("img");
+                    imageDiv.src = catImages[i];
+                    home.appendChild(imageDiv);
+                }
+
+                let centerImage = document.getElementById("centerImage")
+                centerImage.src = catImages[Math.floor(Math.random()*catImages.length)];
+                // TODO: For random cat image, put highlight around selected catImage
+
+            }
+    } 
+
+    function changeImage(input) {
+        // TODO:
+        // If Click Left or Right buttons
+        // Detect if Left or Right Button 
+        // Once detected, then change image source based on moving around the array
+        // Change the highlihted image
+    }
+</script>
+</html>
