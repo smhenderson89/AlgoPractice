@@ -23,42 +23,37 @@ Output: true??
 
 */ 
 
-
+// Work on solving recursively!
 
 var isValid = function(s) {
-    // Check over length of the string
-    // If see a open string, beginning saving index to variable
-        // Check next index
-            // If text is opening, add to open string variable and repeat consuming string
-            // If text is closing, check latest consumed text
-                // If text matches, then remove text from variable and repeat process
-                // If text doesn't match, then exit out of program, it is a fail
     const checkObject = {"(":")", "[":"]", "{":"}"};
     const checkKeys = Object.keys(checkObject);
-    const checkValues = Object.values(checkObject);
-    var openingText = "";
-    var output = false;
+    var text = "";
+    var output = "";
     // check over the legnth of a string
     var l = s.length;
+    // console.log('length: ', l);
     for (let i = 0; i < l; i++) {
+        // console.log("Start(i): ", i);
         // Consume text, check if open bracket
-        if (checkKeys.includes(s[i])) { // if text at index i is an opening bracket
-            openingText += s[i]; 
-        } else {
-            console.log('Invalid');
-            break
-        }
-        console.log(openingText)
-        // Check for closing bracket
-        for (let j = i; j < l; j++) {
-            if (checkObject[s[i]] == s[j]) {
-                console.log("found opposite");
-                output = true;
+        if (checkKeys.includes(s[i])) { // If vlaue is an opening bracket
+            text += s[i];
+            console.log (`Opening:`,text);
+        } else { // If closing bracket
+            console.log('Checking:',s[i], '&', );
+            if (i == 0) {
+                return false
+            } else if (s[i] == checkObject[s[i-1]]) { // Check if closing matches most recent opening
+                console.log('Match of: ', s[i-1], '& ', s[i])
+                text = text.slice(0, -1);
+                console.log('Remaining: ', text, 'length: ', text.length, 'i:', i);
+            } else { // If closing brackets don't match
+                console.log('No Match');
+                return false
             }
         }
     }
-
-    console.log(`Output: `,output);
+    return true
     // each time there is an instance of a (, [, {
         // Check for the corresponding closing bracket
     // Failure states
@@ -66,4 +61,4 @@ var isValid = function(s) {
         // If there is different closing 
 };
 
-isValid("()");
+console.log(isValid("{[]}"));
