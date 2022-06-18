@@ -1,12 +1,7 @@
-const checkObject = {"(":")", "[":"]", "{":"}"};
+str = 'abdcd';
 
-
-keys = Object.keys(checkObject);
-
-x = ")"
-
-if (keys.includes(x)) {
-    console.log(true);
-} else {
-    console.log(false);
+function removeString(start , end) {
+    console.log('Remove slice of array using test command');
 }
+
+removeString(1, 2)
