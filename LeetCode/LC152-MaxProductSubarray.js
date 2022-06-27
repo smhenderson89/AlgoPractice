@@ -70,33 +70,37 @@ localP > MaxP -> MaxP = 2
 */
 
 function maxProduct(nums) {
-    console.log(nums);
-    maxP = Math.max(...nums);
-    console.log('maxP', maxP);
+    // console.log(nums);
     len = nums.length;
 
     //Edge case -> if len == 1
-    if (len == 1) {
+    if (len == 0) {
+        maxP = 0
+    } else if (len == 1) {
         maxP = nums[0];
     } else {
-        localP = nums[0];
-        console.log('localP',nums[0])
+        positiveP = nums[0];
+        negativeP = nums[0];
+        maxP = nums[0];
+        
+        // console.log('positiveP',positiveP, 'negativeP', negativeP, 'maxP', maxP )
         for (let i = 1; i < len; i++) {
-            localP = localP * nums[i];
-            console.log('Check localP:', localP)
 
-            if (localP > maxP) {
-                maxP = localP;
-                console.log('MaxP:', maxP);
-            } else if (localP < 0) {
-                // Check if negative, because total product could be negative
-                // If array has two negative numbers, then keep as negative? O(n**2)??
-                localP = 0;
-                console.log('localP:', localP);
-            }
+            temp = positiveP;
+
+            // console.log('+P', positiveP, '-P', negativeP, 'array:', nums[i]);
+
+            // Determine running total for positive P & negative P for given part of the array
+            positiveP = Math.max(positiveP * nums[i], negativeP * nums[i], nums[i])
+            negativeP = Math.min(temp * nums[i], negativeP * nums[i], nums[i]);
+            
+            // console.log('New +P', positiveP, 'New -P', negativeP);
+
+            maxP = Math.max(positiveP, maxP)
+            // console.log('New MaxP', maxP);
         }
     }
     return maxP
 };
 
-console.log(maxProduct([-2,3,-4]));
+console.log(maxProduct([-5]));
