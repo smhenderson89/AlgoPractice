@@ -11,9 +11,6 @@
 // console.log('Low:', low, '@:', lowIndex);
 // console.log('High:', high, '@:', highIndex);
 
-x = [1,2,3,4,5,6,7,8,9]
-len = x.length;
-half = Math.floor(len / 2);
 // console.log(len);
 
 // half = Math.floor(len / 2);
@@ -35,8 +32,31 @@ half = Math.floor(len / 2);
 // console.log(y);
 // console.log(z);
 
-x = 5
-y = -x
-console.log(y);
+array = [-8,-8, -4, -1, -1, -0, 1, 2, 4, 4, 16]
+
+a = 0
+b = 1
+c = array[a]
+r = array[(array.length) - b]
+
+subArray = array.slice(1, array.length - 1)
+console.log(subArray);
+sum = -(c + r);
+console.log(sum);
+console.log(subArray.includes(sum))
+sumIndex = subArray.indexOf(sum)
+console.log(sumIndex);
+
+// if (sumIndex == 0 ) {
+//     console.log('check for duplicates');
+//     // check adjacent
+//     if (array[1] == sum) {
+//         console.log('triplet found');
+//     }
+// }
+
+// check for duplicates
+
+
 
 

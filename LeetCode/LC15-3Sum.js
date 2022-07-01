@@ -30,21 +30,22 @@ Constraints:
 // Check length of nums
 // If nums < 3, then output = []
 // Else
-// 	Sort nums array least to greatest
-// 	Split nums into two seperate arrays. If len is odd number, then choose left array to be smaller
-// Looking for x + y + z = 0, therefore, x + y = -z
+// 	Sort nums array least to greatest (-10*5, 10*5)
+// Set points L, R at array[0] and array[length - 1]
+while L is < 0 && index[R] > index[L]
+    R + L = join (J) // Game of Thrones
+    create subarray from locations of R & L
+    subArray = array.slice(index of L, index of R)
+    if subArray.includes(join)
+        then found triplet
+            check triplet for duplicate
+            reduce index of R, repeat for extra matches
+    else if (join > 0 )
+        reduce index of R, check for matches
+    else if (join < 0)
+        move R down, check for matches
 
-// foundTriplet = []
-// On the array that is shorter/left array
-// Iterate over leftArrary length (for loop)
 
-// let (-z) to be leftArray[i]
-// let x = rigthArray[i]
-// Does z - x = "y", does that exist within rightArray[i]?
-	// If yes, then possible triplet found
-	// Triplet = [leftArray[i], rightArray[i], foundnumber(RightArray[i])
-		// Check that triplelet isn't a duplicate
-// Repeat for all numbers within leftArray
 
 */
 
@@ -55,44 +56,40 @@ var threeSum = function (nums) {
         nums = nums.sort((a, b) => a - b); // sort the array
         console.log(nums);
         // split into two sub arrays
-        halfLen = Math.floor(len / 2);
-
-        lArray = nums.slice(0, halfLen);
-        rArray = nums.slice(halfLen);
-
-        console.log(lArray);
-        console.log(rArray);
-
-        // Iterate over lArray, looking for matches
-        for (let i = 0; i < lArray.length; i++) {
-        z = -nums[i];
-        console.log("Checking z:", z);
-
-            // Look for index within rArray that equal
-            for (let j = 0; j < rArray.length; j++) {
-                // check if corresponding x + y exists
-                diff = z - rArray[j];
-                console.log('diff:', diff);
-                if (rArray.includes(diff)) {
-                    yIndex = rArray.indexOf(diff)
-                    if (yIndex != j) {
-                        // Determine if triplets already exists
-                        test = [lArray[i], rArray[j], diff];
-                        test = test.sort()
-                        if (!output.includes(test)) {
-                            output.push(test);
-                            console.log(output)
-                        }
-                    }
-                } 
+        l = 0 // left
+        r = len - 1 // right, initialized
+        r = 3;
+        // while (l < 0 && r > l) {}
+        join = -(nums[l] + nums[r])
+        console.log('l', nums[l], 'r', nums[r], 'join', join)
+        subNums = nums.slice(l, r)
+        if(subNums.includes(join)) {
+            found = [nums[l], nums[r], join]
+            if (!output[-1] == found) {
+                console.log('new triplet found')
+                output.push([nums[l], nums[r], join])
+                console.log(output);
+            } else {
+                console.log('duplicate triplet, skip')
             }
+        } else if (join > 0 && r > (l + 1)) {
+            r -= 1;
+            console.log('New r',r);
+        } else if (join < 0 && r > (l + 1)) {
+            r -= 1;
+            console.log('New r')
+        } else if (r = (l + 1)) {
+            // reset r, advance l interger
+            r = len - 1;
+            l++
+            console.log('reset r, adavnce l')
+        }
+    } else {
+        // If Array is less than 3 long, return empty array
+        return output;
     }
-    console.log('End of search:')
+    console.log('Triplets found');
     return output;
-  } else {
-    // If Array is less than 3 long, return empty array
-    return output;
-  }
-};
+  };
 
 console.log(threeSum([-1,0,1,2,-1,-4]));
