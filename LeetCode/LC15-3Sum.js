@@ -32,18 +32,9 @@ Constraints:
 // Else
 // 	Sort nums array least to greatest (-10*5, 10*5)
 // Set points L, R at array[0] and array[length - 1]
-while L is < 0 && index[R] > index[L]
-    R + L = join (J) // Game of Thrones
-    create subarray from locations of R & L
-    subArray = array.slice(index of L, index of R)
-    if subArray.includes(join)
-        then found triplet
-            check triplet for duplicate
-            reduce index of R, repeat for extra matches
-    else if (join > 0 )
-        reduce index of R, check for matches
-    else if (join < 0)
-        move R down, check for matches
+// sum = nums[i] + nums[l] + nums[r]
+check if sum === 0
+if so, then add to output, advance l 
 
 
 
@@ -54,42 +45,47 @@ var threeSum = function (nums) {
     len = nums.length;
     if (len >= 3) {
         nums = nums.sort((a, b) => a - b); // sort the array
-        console.log(nums);
-        // split into two sub arrays
-        l = 0 // left
-        r = len - 1 // right, initialized
-        r = 3;
-        // while (l < 0 && r > l) {}
-        join = -(nums[l] + nums[r])
-        console.log('l', nums[l], 'r', nums[r], 'join', join)
-        subNums = nums.slice(l, r)
-        if(subNums.includes(join)) {
-            found = [nums[l], nums[r], join]
-            if (!output[-1] == found) {
-                console.log('new triplet found')
-                output.push([nums[l], nums[r], join])
-                console.log(output);
-            } else {
-                console.log('duplicate triplet, skip')
+        // console.log(nums); // console sorted array
+
+        // itearte over the array
+        for (let i = 0; i < len; i++) {
+            // skip duplicate starting values
+            if (i > 0 && nums[i] === nums[i - 1]) {
+                continue
             }
-        } else if (join > 0 && r > (l + 1)) {
-            r -= 1;
-            console.log('New r',r);
-        } else if (join < 0 && r > (l + 1)) {
-            r -= 1;
-            console.log('New r')
-        } else if (r = (l + 1)) {
-            // reset r, advance l interger
-            r = len - 1;
-            l++
-            console.log('reset r, adavnce l')
+
+            // set left and right pointers
+            let l = i + 1; // left pointer
+            let r = len - 1; // right pointer
+
+            // check for triplets
+            while (l < r) {
+                sum = nums[i] + nums[l] + nums[r];
+                if (sum === 0) {
+                    output.push([nums[i], nums[l], nums[r]]);
+                    // console.log('triplet found')
+                    // console.log(output);
+                    l++;
+
+                    // avoid duplicate starting values for left pointer
+                    while (l < r && nums[l] === nums[l -1]) {
+                        // console.log('duplicate value: ', nums[l], nums[l-1])
+                        l++;
+                    }
+                } else if (sum < 0) { // if sum is negative, increase left pointer to be less negative
+                    l++;
+                } else { // if sum is more than zero, decrease right pointer
+                    r--;
+                }
+            }
         }
+        return output
+
     } else {
         // If Array is less than 3 long, return empty array
         return output;
     }
-    console.log('Triplets found');
-    return output;
-  };
 
-console.log(threeSum([-1,0,1,2,-1,-4]));
+};
+
+console.log(threeSum([1, 2, -3]));
