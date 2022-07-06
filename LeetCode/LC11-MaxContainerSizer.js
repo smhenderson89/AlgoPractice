@@ -40,9 +40,7 @@ Test
 */ 
 
 var maxArea = function(height) {
-
     output = 0
-
     let i = 0
     let j = height.length - 1
 
