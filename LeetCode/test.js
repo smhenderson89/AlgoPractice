@@ -3,27 +3,13 @@ l1 = [1,2,4]
 l2 = [1,3,4]
 l3 = [1,1,2,3,4,4]
 
-class ListNode {
-    constructor(data) {
-        this.data = data
-        this.next = null
-    }
+function ListNode(val, next) {
+        this.val = (val===undefined ? 0 : val)
+         this.next = (next===undefined ? null : next)
 }
+list1 = {val: 1, next : { val: 2, next: { val: 4, next: null}}}
+list2 = {val: 1, next : { val: 3, next: { val: 4, next: null}}}
 
-class LinkedList {
-    constructor(head = null) {
-        this.head = head
-    }
-}
-
-// set head of LinkedList
-// Working on set up for loop for a linkedList Loop in JS, next steps
-
-node1 = new ListNode()
-
-// for (let i = 0; i < (l3.length - 1); i++) {
-//     tempNode = new ListNode(l3[i], l3[i+1])
-
-// }
-
-// https://www.freecodecamp.org/news/implementing-a-linked-list-in-javascript/
+console.log(list1.val)
+list1 = list1.next
+console.log('update list1', list1)

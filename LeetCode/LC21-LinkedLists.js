@@ -25,42 +25,58 @@
  Output: [0]
  */
 
- var mergeTwoLists = function(list1, list2) {
-    newList = []
-    numDigits = list1.length + list2.length;
-    // console.log('Num of Digits', numDigits);
-         
-    for (let i = 0; i < numDigits; i++) {
-        // Set value for lowest digits, if list is empty set equal to "skip"
-        if (list1.length == 0) {
-            low1 = "skip"
+var mergeTwoLists = function (list1, list2) {
+
+    function ListNode(val, next) { // Create node function
+         this.val = (val===undefined ? 0 : val)
+         this.next = (next===undefined ? null : next)
+    }
+
+    // Initialise a new LinkedList with a dummy ListNode
+    let newList = new ListNode(0);
+
+    // Maintain a reference to the head of the new LinkedList
+    let headOfNewList = newList;
+
+    // Check if list reference valid targets (i.e. have not reached the end of the list)
+    while (list1 != null && list2 != null) {
+        // Check which val in which list is smaller
+        if (list1.val < list2.val) {
+            // Add list1's value to the new list
+            newList.next = list1;
+            console.log('new node', newList.next)
+            // Move list1 to point to the next element
+            list1 = list1.next;
         } else {
-            low1 = list1[0];
+            // Add list2's value to the new list
+            newList.next = list2;
+            console.log('new node', newList.next)
+
+            // Move list2 to its next element
+            list2 = list2.next;
         }
 
-        if (list2.length == 0) {
-            low2 = "skip"
-        } else {
-            low2 = list2[0];
-        }  
+        // Move into the next level of the LinkedList for the next iteration
+        newList = newList.next;
+    }
 
-        // console.log('Checking:', low1, low2);
-        if ((low1 === 'skip') && (low2 === 'skip')) { // If both lists are empty, return new list
-            return newList
-        } else if (low1 < low2 || low1 == low2 || low2 === 'skip') { // if lowest List 1 or are equal
-            newList.push(low1) // push low
-            list1.shift() // remove lowest from list1
-        } else if (low2 < low1 || low1 === 'skip') { // if lowest List 2
-            newList.push(low2) // push lowest to array
-            list2.shift() // remoe lowest from list2
-        }
+    // If list1 has run out of elements
+    if (list1 == null) {
+        // Append list2 to the new list
+        newList.next = list2;
+    }
+    // If list2 has run out of elements
+    else {
+        // Append list1 to the new list
+        newList.next = list1;
+    }
 
-        // Show Updates
-        // console.log('newlist: ', newList);
-        // console.log("1: ", list1, "2: ", list2);
-        // console.log("Lengths:", list1.length, list2.length);
-    } 
-    return newList  
+    return headOfNewList.next;
 };
+// Testing for list 1 & list 2
+list1 = {val: 1, next : { val: 2, next: { val: 4, next: null}}}
+list2 = {val: 1, next : { val: 3, next: { val: 4, next: null}}}
 
-console.log(mergeTwoLists([1,2,4], [1,3,4]))
+console.log(JSON.stringify(mergeTwoLists(list1, list2)))
+
+// https://duncan-mcardle.medium.com/leetcode-problem-21-merge-two-sorted-lists-javascript-b5a4de3da319
