@@ -29,11 +29,12 @@ Constraints:
 s consists of English letters, digits, symbols and spaces.
 */
 
+/*
 ------Code -------
 
 Find longest substring without repeating characters
 
-/*
+
 
 // Find longest without repeating characters 
 // w/o repeating characters
@@ -57,14 +58,38 @@ Way to speed up?
 
 // Can adjust sliding window as needed based on selection 
 
-
-
-
-
- 
-
 */
 
+var lengthOfLongestSubstring = function (s) {
+    // check string length
+    if (!(s.length == 0)) {
+        let start = 0;
+        let end = 0;
+        maxLength = 0; // return of the function
+        stringSet = new Set(); // declare a set
 
+        while (end < s.length) {
+            // iterate over the string
+            console.log('look at index', start, end)
+            if (!stringSet.has(s[end])) { // if string not in the set
+                stringSet.add(s[end]); // add char to Set
+                console.log(stringSet)
+                console.log('New Letter found!',s[end])
+                end += 1; // increment end index
+                maxLength = Math.max(maxLength, stringSet.size); // Establih new max length
+                console.log('new MaxLength', maxLength);
+            } else {
+                // if the char is already in the Set
+                console.log('duplicate char, remove from set', s[start]) // remove pervious windwo from the Set
+                stringSet.delete(s[start]);
+                console.log(stringSet);
+                start += 1; // increment start to look at a further index
+            }
+        }
+    return maxLength;
+    } else {
+        return maxLength;
+    }
+};
 
-
+console.log(lengthOfLongestSubstring("CTCGGGTCCTGCCCGGCCCGTCCGCGCGCCGCTGCAGCGAGCCGGCGGGGGCCCGGCGCCGCGCGACGGAACGCCCTTAGCTCCGGCAGGCAGCTAAGGGGAACGCATGCATGGCGCAAGGAAGCTGGGAAACCGGCGAGAGGACCTCCTCCCCGCCTATCGGAGAGCGGCCGCGCGGTGGCAACCGCCATGCCGGCGCGCGGGGCACACCCGCTGGCCATTTGGGGCACGGGACGCCCGCCGCTTCCGGGGCTGCCCTCTGCGCGCGGGCGCCGAGCCGCGCTCGTGCCCGGCACCGCCACAAGCGGACCCGCACCAGACGTGTTACGCCCGCCACGCAGGCGGGGCCGGCCGGGGACCACCGGGCGTTCCACCGCGTCGGCGACCGCCAGTGAGCCACTGGGGCCGAGGGGTAACGTCGGTGCCCCTAAGAGCCCCCCGGTCGACGCGGGCGACTGCACTCCCGCCACGTCGTGGTCGCTCGCTATTCAGGGCTCGACCGACGCCGGGCCGCTTCCCGCTTGAAGTGCCGTGCGCGACAGGGTGCGTGCACCGTGCGGACCTGCTATGACTTGCCTCGGACCGGTTGGAGGTGCGGCCAGATCCCAGCTTGCGTCACCAGGGGGCCCACGCCCAGCCCCCAAGATCCACTGGCCTCCCAGACGCTGCAGGACTCGCGGCCCGGCACGCCCGGCGCCAGGCCCTAGTGCAGCGGGGCTTTCCTTCCGAGGTCGCCGGGAGGAGGGGTCGCCGGACCGGGCAGCTCTGGTGCCCTGACCGGGAGGGCCGTCGGCCCCCGGCCCTTAGGCCCTGCACTCGGCTCCATAAACGGGCCGCCGGACACGGGGCCCGTGGATCGGTAAGGGGCACGGGGCGCCCCCGGGCGCGGCGGACGGGCGGCTTGGCGCCCTGAGCACGGCCGCGCGCCCGAATCTGGCTCCGCCCTGGGGGCCCCGGACCCCGACGGTCGTAGACCGCAGGACCGGCCGGGGGGGTGCGC"))
