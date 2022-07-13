@@ -34,8 +34,6 @@ test cases
 */
 
 var search = function(nums, target) {
-
-
     // nums is sorted nums
     // target equal target number
     // edge case, if nums.length = 1

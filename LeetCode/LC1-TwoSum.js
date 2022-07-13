@@ -44,3 +44,5 @@ Output: [0,1]
         }
     }
 };
+
+console.log(twoSum([3,3], 6));
