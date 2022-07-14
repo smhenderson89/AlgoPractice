@@ -20,6 +20,12 @@ Example 3:
 Input: nums = [3,3], target = 6
 Output: [0,1]
 
+2 <= nums.length <= 10**4
+-10**9 <= nums[i] <= 10**9
+-10**9 <= target <= 10**9
+Only one valid answer exists.
+
+
 */
 
 /**
