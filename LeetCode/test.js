@@ -20,9 +20,9 @@ for (let i =0; i< strs.length; i++ ) {
     stringHash = 1
 
     for (let j = 0; j < x.length; j++) {
-        if (x[j].length == 0) {
+        if (x[j].length == 0) { // if str lenght == 0
             stringHash = 1
-        } else if (x[j].length == 1) {
+        } else if (x[j].length == 1) { // if str length is 1
             stringHash *= x[j].charCodeAt(0)
         } else {
         stringHash *= x[j].charCodeAt(0) // multiply stringHash by ASCII code for each letter to make a unique hash
