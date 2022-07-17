@@ -30,17 +30,11 @@ strs[i] consists of lowercase English letters.
 
 var groupAnagrams = function (strs) {
   // strs = ["a"]
-  strs = ["eat","tea","tan","ate","nat","bat"]
+  // strs = ["eat","tea","tan","ate","nat","bat"]
   // strs = ["eat", "late", "later", "Pneumonoultramicroscopicsilicovolcanoconiosis"]
   // strs = ["", "b"];
 
   hashTable = new Map()
-
-    /* Stupid Leetcode example
-    strs = ["nozzle","punjabi","waterlogged","imprison","crux","numismatists","sultans","rambles","deprecating",
-    "aware","outfield","marlborough","guardrooms","roast","wattage","shortcuts","confidential","reprint",
-    "foxtrot","dispossession","floodgate","unfriendliest","semimonthlies","dwellers","walkways","wastrels"]
-    */
 
   //strs = ["", "b"] -> Expected -> [["b"], [""]]
   // Generate hash for each string
@@ -54,8 +48,9 @@ var groupAnagrams = function (strs) {
         stringHash = 1; // baseline for hash
         x = strs[i].split("");
         for (let j = 0; j < x.length; j++) {
-            stringHash *= x[j].charCodeAt(0);
+            stringHash += x[j].charCodeAt(0);
         }
+        stringHash = (stringHash << 5) - stringHash + y // bitwise operators to make string hash extra unqiue
     }
 
     // Set a hash table where the key is the hash, and the values are the strings that have the same hash
@@ -82,4 +77,4 @@ var groupAnagrams = function (strs) {
   return output
 };
 
-console.log(groupAnagrams("", "b"))
+console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
