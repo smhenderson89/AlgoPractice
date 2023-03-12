@@ -51,3 +51,11 @@ roads represents a valid tree.
 
 
 */
+
+/* 
+-- Create an adjacency List
+Example: Adjacent List -> {"0" ; 1, 2, 3}
+
+- Use a depth first search for (node, parent)
+
+*/
