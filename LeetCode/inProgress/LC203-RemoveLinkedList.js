@@ -17,5 +17,21 @@ Example 3:
 Input: head = [7,7,7,7], val = 7
 Output: []
 
+    Given a head and value
+    prevNode = None
+    currNode = head
+    For each node in the list (until LastNode.Pointer != Null)
+        Evaluate the value of one node
+        Check if that node matches the target value
+            If matches, then remove from the linked list
+            Remove the pointer from the previous list
+            Change pointer to the next value in the list
 */
 
+var removeElements = function(head, val) {
+    // create new head at the beginning to 
+    dummy = ListNode(-1, head)
+
+    // 
+    
+};
